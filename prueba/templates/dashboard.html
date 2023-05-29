@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/static/dashboard.css">
+<html>
+<head>
+    <title>Sistema Bancario - Panel de Control</title>
+</head>
+<body>
+    <h1>Bienvenido al panel de control, {{ user['first_name'] }} {{ user['last_name'] }}</h1>
+    <h3>Saldos:</h3>
+    <p>Tu saldo actual es: ${{ user['balance'] }}</p>
+
+    <h3>Transferencia de fondos:</h3>
+    <form action="/transfer" method="POST">
+        <label for="receiver">Destinatario:</label>
+        <input type="text" id="receiver" name="receiver" required><br><br>
+        <label for="amount">Monto:</label>
+        <input type="number" id="amount" name="amount" required><br><br>
+        <input type="submit" value="Transferir">
+    </form>
+
+    <h3>Recarga de saldo:</h3>
+    <form action="/reload" method="POST">
+        <label for="amount">Monto:</label>
+        <input type="number" id="amount" name="amount" required><br><br>
+        <input type="submit" value="Recargar">
+    </form>
+
+    <h3>Pago:</h3>
+    <form action="/pay" method="POST">
+        <label for="amount">Monto:</label>
+        <input type="number" id="amount" name="amount" required><br><br>
+        <input type="submit" value="Pagar">
+    </form>
+
+    <h3>Tarjeta electrónica:</h3>
+    <p>Información de la tarjeta:</p>
+    <ul>
+        <li>Correo electrónico: {{ user['email'] }}</li>
+        <li>Nombre: {{ user['first_name'] }}</li>
+        <li>Apellido: {{ user['last_name'] }}</li>
+        <li>Nombre de usuario: {{ session['username'] }}</li>
+    </ul>
+
+    <a href="/logout">Cerrar sesión</a>
+</body>
+</html>
